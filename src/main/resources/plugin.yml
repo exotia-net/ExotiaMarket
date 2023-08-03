@@ -1,0 +1,4 @@
+name: ExotiaMarket
+version: '${version}'
+main: net.exotia.plugins.market.MarketPlugin
+api-version: '1.19'

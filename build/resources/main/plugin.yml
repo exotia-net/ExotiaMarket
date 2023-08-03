@@ -1,0 +1,4 @@
+name: ExotiaMarket
+version: '1.0-SNAPSHOT'
+main: net.exotia.plugins.market.MarketPlugin
+api-version: '1.19'
