@@ -1,4 +1,5 @@
 plugins {
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
     id 'java'
 }
 
@@ -19,11 +20,15 @@ repositories {
         name = "exotiaRepositoryReleases"
         url = "https://repository.exotia.net/releases"
     }
+    maven {
+        url 'https://repo.xenondevs.xyz/releases'
+    }
 }
 
 dependencies {
     compileOnly "io.papermc.paper:paper-api:1.19-R0.1-SNAPSHOT"
     implementation 'com.zaxxer:HikariCP:5.0.1'
+    implementation "xyz.xenondevs.invui:invui:1.13"
     implementation "net.exotia.developer.kit.core:core:1.0.5"
 }
 
@@ -50,4 +55,10 @@ processResources {
     filesMatching('plugin.yml') {
         expand props
     }
+}
+
+
+jar {
+    actions = []
+    dependsOn('shadowJar')
 }

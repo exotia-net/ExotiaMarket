@@ -4,4 +4,5 @@ import dev.rollczi.litecommands.command.route.Route;
 
 @Route(name = "market")
 public class MarketCommand {
+
 }
