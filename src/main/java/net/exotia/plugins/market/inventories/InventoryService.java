@@ -2,14 +2,11 @@ package net.exotia.plugins.market.inventories;
 
 import net.exotia.developer.kit.core.PluginFactory;
 import net.exotia.plugins.market.inventories.abstractions.AbstractInventory;
-import net.exotia.plugins.market.inventories.abstractions.AbstractInventoryConfiguration;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 public class InventoryService {
-    private final List<AbstractInventory<?>> cachedInventories = new ArrayList<>();
-    private final List<AbstractInventoryConfiguration> configurations = new ArrayList<>();
+    private final HashMap<Class<?>, AbstractInventory<?>> cachedInventories = new HashMap<>();
     private final PluginFactory pluginFactory;
 
     public InventoryService(PluginFactory pluginFactory) {
@@ -17,13 +14,14 @@ public class InventoryService {
     }
 
     public InventoryService withInventory(AbstractInventory<?> baseInventory) {
-        this.pluginFactory.configFile(baseInventory.configurationClass(), this.fileName(baseInventory), config -> {
-            this.configurations.add(config);
-            baseInventory.setConfiguration(config);
-        });
+        this.pluginFactory.configFile(baseInventory.configurationClass(), this.fileName(baseInventory), baseInventory::setConfiguration);
         baseInventory.setInventoryService(this);
-        this.cachedInventories.add(baseInventory);
+        this.cachedInventories.put(baseInventory.inventoryClass(), baseInventory);
         return this;
+    }
+
+    public AbstractInventory<?> inventory(Class<? extends AbstractInventory<?>> abstractInventory) {
+        return this.cachedInventories.get(abstractInventory);
     }
 
     private String fileName(AbstractInventory<?> baseInventory) {

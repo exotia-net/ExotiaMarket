@@ -39,7 +39,7 @@ public class MarketPlugin extends JavaPlugin {
         databaseService.load();
 
         pluginFactory.liteCommands(this.messagesConfiguration.liteCommands, builder -> { builder
-                .commandInstance(new MarketCommand());
+                .commandInstance(new MarketCommand(inventoryService));
         });
 
         ExotiaPlugin exotiaPlugin = pluginFactory.produce();

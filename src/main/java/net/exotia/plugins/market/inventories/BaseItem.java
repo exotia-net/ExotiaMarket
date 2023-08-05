@@ -8,4 +8,9 @@ import java.util.List;
 public class BaseItem extends OkaeriConfig {
     public ExotiaItem item;
     public List<String> actions;
+
+    public BaseItem(ExotiaItem item, List<String> actions) {
+        this.item = item;
+        this.actions = actions;
+    }
 }
