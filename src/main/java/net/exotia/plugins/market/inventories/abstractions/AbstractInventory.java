@@ -10,11 +10,13 @@ import org.jetbrains.annotations.NotNull;
 import xyz.xenondevs.invui.gui.Gui;
 import xyz.xenondevs.invui.gui.PagedGui;
 import xyz.xenondevs.invui.gui.structure.Markers;
+import xyz.xenondevs.invui.item.Item;
 import xyz.xenondevs.invui.item.ItemProvider;
 import xyz.xenondevs.invui.item.builder.ItemBuilder;
 import xyz.xenondevs.invui.item.impl.AbstractItem;
 import xyz.xenondevs.invui.window.Window;
 
+import java.util.List;
 import java.util.function.BiConsumer;
 
 public abstract class AbstractInventory<T extends AbstractInventoryConfiguration> {
@@ -28,7 +30,8 @@ public abstract class AbstractInventory<T extends AbstractInventoryConfiguration
 
     public abstract String inventoryId();
     protected abstract GuiType guiType();
-    protected abstract Gui initialize(Gui.Builder<?, ?> builder);
+    public abstract List<Item> content();
+    protected abstract void initialize(Gui.Builder<?, ?> builder);
 
     public Class<?> inventoryClass() {
         return this.getClass();
@@ -64,7 +67,7 @@ public abstract class AbstractInventory<T extends AbstractInventoryConfiguration
         Gui.Builder<?, ?> builder;
         switch (this.guiType()) {
             case NORMAL -> builder = Gui.normal();
-            case PAGED -> builder = PagedGui.items();
+            case PAGED -> builder = PagedGui.items().setContent(this.content());
             default -> throw new InvalidInventoryTypeException();
         }
         builder.setStructure(this.configuration.getPattern()).addIngredient('x', Markers.CONTENT_LIST_SLOT_HORIZONTAL);

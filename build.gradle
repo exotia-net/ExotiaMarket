@@ -29,7 +29,7 @@ dependencies {
     compileOnly "io.papermc.paper:paper-api:1.19-R0.1-SNAPSHOT"
     implementation 'com.zaxxer:HikariCP:5.0.1'
     implementation "xyz.xenondevs.invui:invui:1.13"
-    implementation "net.exotia.developer.kit.core:core:1.0.5"
+    implementation "net.exotia.developer.kit.core:core:1.0.9"
 }
 
 def targetJavaVersion = 17

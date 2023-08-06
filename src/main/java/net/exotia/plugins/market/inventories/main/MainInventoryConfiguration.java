@@ -1,5 +1,6 @@
 package net.exotia.plugins.market.inventories.main;
 
+import net.exotia.developer.kit.utils.items.ExotiaItem;
 import net.exotia.developer.kit.utils.items.ExotiaItemBuilder;
 import net.exotia.plugins.market.inventories.BaseItem;
 import net.exotia.plugins.market.inventories.abstractions.AbstractInventoryConfiguration;
@@ -21,6 +22,18 @@ public class MainInventoryConfiguration extends AbstractInventoryConfiguration {
     private HashMap<Character, BaseItem> items = new HashMap<>(){{
         put('#', new BaseItem(new ExotiaItemBuilder(Material.BLACK_STAINED_GLASS_PANE).name("&7").build(), List.of("")));
     }};
+
+    public List<String> viewItemLore = List.of(
+            "",
+            "&fWłasciciel: <gradient:#4fa943:#9ec52f>{owner}",
+            "&fCena: <gradient:#4fa943:#9ec52f>{price}",
+            "",
+            "&fData dodania: <gradient:#4fa943:#9ec52f>{created}",
+            "&fData wygaśniecia: <gradient:#4fa943:#9ec52f>{expireIn}",
+            "",
+            "&f&oKliknij aby <gradient:#4fa943:#9ec52f><b>kupić</b></gradient> &ften przedmiot",
+            ""
+    );
 
     @Override
     public String[] getPattern() {
